@@ -1,5 +1,5 @@
-{{- $title := partialCached "data/title" . .RelPermalink -}}
-{{- $description := partialCached "data/description" . .RelPermalink -}}
+{{- $title := partialCached "data/title" . -}}
+{{- $description := partialCached "data/description" . -}}
 
 <meta property='og:title' {{ printf "content=%q" $title | safeHTMLAttr }}>
 <meta property='og:description' {{ printf "content=%q" $description | safeHTMLAttr }}>
@@ -33,11 +33,11 @@
     {{- end -}}
 {{- else -}}
     {{- if not .Site.Lastmod.IsZero -}}
-        <meta property='og:updated_time' content='{{ .Site.Lastmod.Format " 2006-01-02T15:04:05-07:00 " | safeHTML }}'/>
+        <meta property='og:updated_time' content='{{ .Site.Lastmod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}'/>
     {{- end -}}
 {{- end -}}
 
-{{ $image := partialCached "helper/image" (dict "Context" . "Type" "opengraph") .RelPermalink "opengraph" }}
+{{- $image := partialCached "helper/image" (dict "Context" . "Type" "opengraph") -}}
 {{- if $image.exists -}}
     <meta property='og:image' content='{{ absURL $image.permalink }}' />
 {{- end -}}
